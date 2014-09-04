@@ -41,7 +41,7 @@
                 <use>standard</use>
                 <args>
                     <module>Made_Loop54</module>
-                    <frontName>loop54</frontName>
+                    <frontName>made_loop54</frontName>
                 </args>
             </made_loop54>
         </routers>

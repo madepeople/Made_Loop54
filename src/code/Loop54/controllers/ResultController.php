@@ -1,7 +1,10 @@
 <?php
 
 /**
- * Class Made_Loop54_AjaxController
+ * Custom results controller, because we want an AJAX result for autocompletion
+ * for instance
+ *
+ * @author jonathan@madepeople.se
  */
 class Made_Loop54_ResultController extends Mage_Core_Controller_Front_Action
 {
@@ -45,17 +48,17 @@ class Made_Loop54_ResultController extends Mage_Core_Controller_Front_Action
             }
 
             $layout = $this->getLayout();
+            $this->loadLayout(array('default', 'catalogsearch_result_index'));
 
             // This instantiates the layer instance which handles the search results
-            $layout->createBlock('made_loop54/catalogsearch_layer');
-
-            $output = $layout->createBlock('catalogsearch/result')
-                ->setTemplate('catalogsearch/result.phtml')
-                ->toHtml();
+            $result = $layout->getBlock('search_result_list');
+            $toolbar = $result->getChild('product_list_toolbar');
+            $toolbar->unsetChild('product_list_toolbar_pager');
+            $toolbar->disableExpanded();
+            $output = $result->toHtml();
         }
 
         $this->getResponse()
-            ->setHeader('Content-type', 'application/json')
             ->setBody($output);
     }
 
