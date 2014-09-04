@@ -18,4 +18,14 @@ class Made_Loop54_Model_Resource_Engine
     {
         return $this->_adapter->ping();
     }
+
+    /**
+     * Retrieve search result data collection
+     *
+     * @return Enterprise_Search_Model_Resource_Collection
+     */
+    public function getResultCollection()
+    {
+        return Mage::getResourceModel('made_loop54/collection')->setEngine($this);
+    }
 }

@@ -9,7 +9,7 @@ class Made_Loop54_Model_Adapter_Loop54
 {
     public function ping()
     {
-        // @TODO: Implementation, we need a ping call from loop54. Perhaps an
+        // @TODO: Implementation, we need a ping call from Loop54. Perhaps an
         // empty search query?
         return true;
     }
@@ -26,6 +26,10 @@ class Made_Loop54_Model_Adapter_Loop54
     {
         $request = new Loop54_Request('Search');
         $request->setValue('QueryString', $query);
+
+        foreach ($params as $key => $value) {
+            $request->setValue($key, $value);
+        }
 
         $url = Mage::getStoreConfig('made_loop54/general/url');
         $response = Loop54_RequestHandling::getResponse($url, $request);
