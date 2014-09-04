@@ -40,6 +40,13 @@ class Made_Loop54_Model_Adapter_Loop54
         );
     }
 
+    /**
+     * Return autocomplete results suitable for input text quick search fields
+     *
+     * @param $query
+     * @param array $params
+     * @return array
+     */
     public function getAutocompleteResults($query, $params = array())
     {
         $request = new Loop54_Request('AutoComplete');

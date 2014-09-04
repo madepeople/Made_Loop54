@@ -7,6 +7,12 @@
  */
 class Made_Loop54_Model_Adminhtml_System_Config_Source_Engine
 {
+
+    /**
+     * Include the Loop54 engine in the selection of search engines
+     *
+     * @return array
+     */
     public function toOptionArray()
     {
         $engines = array(

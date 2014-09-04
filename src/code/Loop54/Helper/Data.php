@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @author jonathan@madepeople.se
+ */
 class Made_Loop54_Helper_Data extends Mage_Core_Helper_Abstract
 {
 

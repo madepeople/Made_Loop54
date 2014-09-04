@@ -9,6 +9,10 @@
 class Made_Loop54_ResultController extends Mage_Core_Controller_Front_Action
 {
 
+    /**
+     * The action only renders a single root element that developers can
+     * modify using layout XML
+     */
     public function ajaxAction()
     {
         $query = Mage::helper('catalogsearch')->getQuery();

@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @author jonathan@madepeople.se
+ */
 class Made_Loop54_Model_Resource_Collection
     extends Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Collection
 {

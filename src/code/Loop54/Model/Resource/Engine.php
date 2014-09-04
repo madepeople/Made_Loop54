@@ -1,9 +1,15 @@
 <?php
 
+/**
+ * @author jonathan@madepeople.se
+ */
 class Made_Loop54_Model_Resource_Engine
 {
     protected $_adapter;
 
+    /**
+     * We only have one adapter right now
+     */
     public function __construct()
     {
         $this->_adapter = Mage::getSingleton('made_loop54/adapter_loop54');
