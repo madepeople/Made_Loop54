@@ -53,4 +53,11 @@
             </made_loop54>
         </routers>
     </frontend>
+    <default>
+        <made_loop54>
+            <general>
+                <enabled>1</enabled>
+            </general>
+        </made_loop54>
+    </default>
 </config>

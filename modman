@@ -1,3 +1,4 @@
 src/code/*                  app/code/community/Made/
+src/lib/*                   lib/
 Made_Loop54.xml             app/etc/modules/
 package.xml                 var/connect/Made_Loop54.xml
