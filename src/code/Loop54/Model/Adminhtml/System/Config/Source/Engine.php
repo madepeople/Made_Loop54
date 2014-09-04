@@ -15,6 +15,8 @@ class Made_Loop54_Model_Adminhtml_System_Config_Source_Engine
         );
 
         if (Mage::getConfig()->getModuleConfig('Enterprise_Search')) {
+            // This might not be a good idea since other files also depend on
+            // things working that we also make our own versions of
             $engines['enterprise_search/engine'] = Mage::helper('adminhtml')->__('Solr');
         }
 
