@@ -11,16 +11,9 @@
                 <class>Made_Loop54_Model</class>
                 <resourceModel>loop54_resource</resourceModel>
             </made_loop54>
-            <!--
             <made_loop54_resource>
                 <class>Made_Loop54_Model_Resource</class>
-                <entities>
-                    <message>
-                        <table>made_loop54</table>
-                    </message>
-                </entities>
             </made_loop54_resource>
-            -->
         </models>
         <!--
         <resources>
