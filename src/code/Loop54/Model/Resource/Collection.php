@@ -47,7 +47,6 @@ class Made_Loop54_Model_Resource_Collection
     public function addSearchFilter($query)
     {
         $this->_searchQueryText = $query;
-
         return $this;
     }
 
@@ -65,10 +64,10 @@ class Made_Loop54_Model_Resource_Collection
 
             $params = array();
             if ($this->_pageSize !== false) {
-                $page              = ($this->_curPage  > 0) ? (int) $this->_curPage  : 1;
-                $rowCount          = ($this->_pageSize > 0) ? (int) $this->_pageSize : 1;
-                $params['offset']  = $rowCount * ($page - 1);
-                $params['DirectResults_MaxEntities']   = $rowCount;
+                $page = ($this->_curPage  > 0) ? (int) $this->_curPage  : 1;
+                $rowCount = ($this->_pageSize > 0) ? (int) $this->_pageSize : 1;
+                $params['DirectResults_MaxEntities'] = $rowCount;
+                $params['DirectResults_Page'] = $page;
             }
 
             list($result, $size) = $this->_engine->search($query, $params);
@@ -94,7 +93,8 @@ class Made_Loop54_Model_Resource_Collection
     {
         if ($this->_size === null) {
             // We have to load, Loop54 doesn't support HEAD
-            $this->load();
+            list($result, $size) = $this->_engine->search($this->_searchQueryText);
+            $this->_size = $size;
         }
         return $this->_size;
     }
