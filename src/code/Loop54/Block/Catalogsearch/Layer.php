@@ -24,29 +24,4 @@ class Made_Loop54_Block_Catalogsearch_Layer extends Mage_CatalogSearch_Block_Lay
         return parent::getLayer();
     }
 
-    /**
-     * We needed a nifty place to inject javascript variables without the need
-     * for extra templates, and this obviously works
-     *
-     * @return string|void
-     */
-    protected function _toHtml()
-    {
-        $ajaxResultBaseUrl = $this->getUrl('made_loop54/result/ajax');
-        $seachFormPlaceholder = Mage::helper('catalogsearch')->__('Search entire store here...');
-
-        $ajaxResultBaseUrl = Mage::helper('core')->jsonEncode($ajaxResultBaseUrl);
-        $seachFormPlaceholder = Mage::helper('core')->jsonEncode($seachFormPlaceholder);
-
-        $html = parent::_toHtml();
-        $html .=<<<EOF
-<script>
-var _ajaxResultBaseUrl = $ajaxResultBaseUrl;
-var _searchFormPlaceholder = $seachFormPlaceholder;
-</script>
-EOF;
-
-        return $html;
-    }
-
 }

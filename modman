@@ -1,6 +1,6 @@
 src/code/*                  app/code/community/Made/
 src/frontend/layout/*       app/design/frontend/base/default/layout/made/
+src/frontend/template/*     app/design/frontend/base/default/template/made/
 src/lib/*                   lib/
-src/js/*                    js/made/
 Made_Loop54.xml             app/etc/modules/
 package.xml                 var/connect/Made_Loop54.xml

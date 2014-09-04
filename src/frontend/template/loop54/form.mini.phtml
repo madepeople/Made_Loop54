@@ -1,0 +1,17 @@
+<?php
+$catalogSearchHelper =  $this->helper('catalogsearch');
+$loop54Helper =  $this->helper('made_loop54');
+?>
+<form id="search_mini_form" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
+    <div class="form-search">
+        <input id="search" type="text" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" value="<?php echo $catalogSearchHelper->getEscapedQueryText() ?>" class="input-text" maxlength="<?php echo $catalogSearchHelper->getMaxQueryLength();?>" />
+        <button type="submit" title="<?php echo $this->__('Search') ?>" class="button"><span class="icon-search"></span></button>
+        <div id="search_autocomplete" class="search-autocomplete"></div>
+    </div>
+    <script type="text/javascript">
+        //<![CDATA[
+        var searchForm = new Varien.searchForm('search_mini_form', 'search', '<?php echo $this->__('Search entire store here...') ?>');
+        searchForm.initAutocomplete('<?php echo $loop54Helper->getAjaxResultUrl() ?>', 'search_autocomplete');
+        //]]>
+    </script>
+</form>

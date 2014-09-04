@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layout>
+    <default>
+        <reference name="top.search">
+            <action method="setTemplate">
+                <template>made/loop54/form.mini.phtml</template>
+            </action>
+        </reference>
+    </default>
+
     <catalogsearch_result_index>
         <reference name="left">
             <remove name="catalogsearch.leftnav"/>

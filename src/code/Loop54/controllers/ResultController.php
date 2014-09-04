@@ -48,7 +48,11 @@ class Made_Loop54_ResultController extends Mage_Core_Controller_Front_Action
             }
 
             $layout = $this->getLayout();
-            $this->loadLayout(array('default', 'catalogsearch_result_index'));
+            $this->loadLayout(array(
+                'default',
+                'catalogsearch_result_index',
+                'made_loop54_result_ajax',
+            ));
 
             // This instantiates the layer instance which handles the search results
             $result = $layout->getBlock('search_result_list');
