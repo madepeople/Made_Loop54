@@ -21,3 +21,4 @@ class Made_Loop54_Model_Search_Layer extends Mage_CatalogSearch_Model_Layer
         return $collection;
 
     }
+}

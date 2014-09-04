@@ -53,11 +53,4 @@
             </updates>
         </layout>
     </frontend>
-    <default>
-        <catalog>
-            <searc>
-                <loop54_url></loop54_url>
-            </searc>
-        </catalog>
-    </default>
 </config>

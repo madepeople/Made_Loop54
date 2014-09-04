@@ -31,9 +31,12 @@ class Made_Loop54_Model_Adapter_Loop54
             $request->setValue($key, $value);
         }
 
-        $url = Mage::getStoreConfig('made_loop54/general/url');
+        $url = Mage::getStoreConfig('catalog/search/loop54_url');
         $response = Loop54_RequestHandling::getResponse($url, $request);
 
-        return $response->getCollection('DirectResults');
+        return array(
+            $response->getCollection('DirectResults'),
+            $response->_data->DirectResults_TotalItems
+        );
     }
 }

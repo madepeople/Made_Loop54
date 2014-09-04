@@ -18,6 +18,13 @@ class Made_Loop54_Model_Resource_Collection
     protected $_engine = null;
 
     /**
+     * Holds the size of the search result
+     *
+     * @var int
+     */
+    protected $_size;
+
+    /**
      * Set search engine
      *
      * @param object $engine
@@ -56,6 +63,7 @@ class Made_Loop54_Model_Resource_Collection
         if ($this->_engine) {
             $query = $this->_searchQueryText;
 
+            $params = array();
             if ($this->_pageSize !== false) {
                 $page              = ($this->_curPage  > 0) ? (int) $this->_curPage  : 1;
                 $rowCount          = ($this->_pageSize > 0) ? (int) $this->_pageSize : 1;
@@ -63,8 +71,12 @@ class Made_Loop54_Model_Resource_Collection
                 $params['DirectResults_MaxEntities']   = $rowCount;
             }
 
-            $result = $this->_engine->getIdsByQuery($query, $params);
-            $ids    = (array) $result['ids'];
+            list($result, $size) = $this->_engine->search($query, $params);
+            $this->_size = $size;
+            $ids = array();
+            foreach ($result as $item) {
+                $ids[] = $item->entity->externalId;
+            }
         }
 
         $this->_searchedEntityIds = &$ids;
@@ -80,6 +92,10 @@ class Made_Loop54_Model_Resource_Collection
 
     public function getSize()
     {
-        return 1;
+        if ($this->_size === null) {
+            // We have to load, Loop54 doesn't support HEAD
+            $this->load();
+        }
+        return $this->_size;
     }
 }

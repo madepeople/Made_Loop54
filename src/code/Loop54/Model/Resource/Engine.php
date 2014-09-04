@@ -51,4 +51,16 @@ class Made_Loop54_Model_Resource_Engine
     {
         return true;
     }
+
+    /**
+     * Perform a search query
+     *
+     * @param $query
+     * @param array $params
+     * @return array
+     */
+    public function search($query, $params = array())
+    {
+        return $this->_adapter->search($query, $params);
+    }
 }

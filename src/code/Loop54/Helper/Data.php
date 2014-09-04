@@ -2,9 +2,18 @@
 
 class Made_Loop54_Helper_Data extends Mage_Core_Helper_Abstract
 {
-    public function isEnabled()
+
+    /**
+     * Retrieve information from search engine configuration
+     *
+     * @param string $field
+     * @param int $storeId
+     * @return string|int
+     */
+    public function getSearchConfigData($field, $storeId = null)
     {
-        return Mage::getStoreConfigFlag('made_loop54/general/enabled');
+        $path = 'catalog/search/' . $field;
+        return Mage::getStoreConfig($path, $storeId);
     }
 
     /**
@@ -14,9 +23,13 @@ class Made_Loop54_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function isActiveEngine()
     {
-        $model = Mage::getResourceSingleton('made_loop54');
-        if ($model && $model->test()) {
-            return true;
+        $engine = $this->getSearchConfigData('engine');
+
+        if ($engine && Mage::getConfig()->getResourceModelClassName($engine)) {
+            $model = Mage::getResourceSingleton($engine);
+            if ($model && $model->test()) {
+                return true;
+            }
         }
 
         return false;
