@@ -54,10 +54,10 @@
         </routers>
     </frontend>
     <default>
-        <made_loop54>
-            <general>
-                <enabled>1</enabled>
-            </general>
-        </made_loop54>
+        <catalog>
+            <searc>
+                <loop54_url></loop54_url>
+            </searc>
+        </catalog>
     </default>
 </config>
