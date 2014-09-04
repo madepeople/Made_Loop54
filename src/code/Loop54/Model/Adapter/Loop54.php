@@ -39,4 +39,22 @@ class Made_Loop54_Model_Adapter_Loop54
             $response->_data->DirectResults_TotalItems
         );
     }
+
+    public function getAutocompleteResults($query, $params = array())
+    {
+        $request = new Loop54_Request('AutoComplete');
+        $request->setValue('QueryString', $query);
+
+        foreach ($params as $key => $value) {
+            $request->setValue($key, $value);
+        }
+
+        $url = Mage::getStoreConfig('catalog/search/loop54_url');
+        $response = Loop54_RequestHandling::getResponse($url, $request);
+
+        return array(
+            $response->getCollection('AutoComplete'),
+            $response->_data->AutoComplete_TotalItems
+        );
+    }
 }

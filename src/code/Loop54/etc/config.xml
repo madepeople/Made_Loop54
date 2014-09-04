@@ -53,4 +53,11 @@
             </updates>
         </layout>
     </frontend>
+    <default>
+        <catalog>
+            <search>
+                <loop54_autocomplete_max_results>10</loop54_autocomplete_max_results>
+            </search>
+        </catalog>
+    </default>
 </config>

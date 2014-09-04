@@ -15,4 +15,10 @@
             <block type="made_loop54/catalogsearch_layer" name="made_loop54.leftnav" before="-" template="catalog/layer/view.phtml"/>
         </reference>
     </catalogsearch_result_index>
+
+    <made_loop54_result_ajax>
+        <reference name="root">
+            <block type="made_loop54/catalogsearch_autocomplete" name="content" template="made/loop54/autocomplete.phtml"/>
+        </reference>
+    </made_loop54_result_ajax>
 </layout>

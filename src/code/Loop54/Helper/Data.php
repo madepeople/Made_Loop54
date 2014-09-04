@@ -40,9 +40,9 @@ class Made_Loop54_Helper_Data extends Mage_Core_Helper_Abstract
      *
      * @return string|void
      */
-    protected function getAjaxResultUrl()
+    public function getAjaxResultUrl()
     {
-        $ajaxResultBaseUrl = $this->getUrl('made_loop54/result/ajax');
+        $ajaxResultBaseUrl = Mage::app()->getStore()->getUrl('made_loop54/result/ajax');
         return $ajaxResultBaseUrl;
     }
 }
