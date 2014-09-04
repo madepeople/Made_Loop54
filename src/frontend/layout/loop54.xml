@@ -17,8 +17,6 @@
     </catalogsearch_result_index>
 
     <made_loop54_result_ajax>
-        <reference name="root">
-            <block type="made_loop54/catalogsearch_autocomplete" name="content" template="made/loop54/autocomplete.phtml"/>
-        </reference>
+        <block type="made_loop54/catalogsearch_autocomplete" name="root" output="toHtml" template="made/loop54/autocomplete.phtml"/>
     </made_loop54_result_ajax>
 </layout>

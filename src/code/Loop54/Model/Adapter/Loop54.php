@@ -52,9 +52,6 @@ class Made_Loop54_Model_Adapter_Loop54
         $url = Mage::getStoreConfig('catalog/search/loop54_url');
         $response = Loop54_RequestHandling::getResponse($url, $request);
 
-        return array(
-            $response->getCollection('AutoComplete'),
-            $response->_data->AutoComplete_TotalItems
-        );
+        return $response->getCollection('AutoComplete');
     }
 }

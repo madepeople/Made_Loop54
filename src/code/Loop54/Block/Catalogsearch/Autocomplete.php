@@ -10,7 +10,7 @@ class Made_Loop54_Block_Catalogsearch_Autocomplete
         $params = array(
             'AutoComplete_MaxEntities' => Mage::getStoreConfig('catalog/search/loop54_autocomplete_max_results')
         );
-        list ($results, $size) = $adapter->getAutocompleteResults($query->getQueryText(), $params);
+        $results = $adapter->getAutocompleteResults($query->getQueryText(), $params);
         return $results;
     }
 }
