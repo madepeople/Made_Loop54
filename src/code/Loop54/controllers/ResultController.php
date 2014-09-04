@@ -52,17 +52,8 @@ class Made_Loop54_ResultController extends Mage_Core_Controller_Front_Action
                 'made_loop54_result_ajax',
             ));
 
-            // This instantiates the layer instance which handles the search results
-//            $result = $layout->getBlock('search_result_list');
-//            $toolbar = $result->getChild('product_list_toolbar');
-//            $toolbar->unsetChild('product_list_toolbar_pager');
-//            $toolbar->disableExpanded();
-//            $output = $result->toHtml();
             $this->renderLayout();
         }
-
-//        $this->getResponse()
-//            ->setBody($output);
     }
 
 }
