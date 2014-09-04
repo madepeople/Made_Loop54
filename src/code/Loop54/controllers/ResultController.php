@@ -13,6 +13,7 @@ class Made_Loop54_ResultController extends Mage_Core_Controller_Front_Action
 
         $query->setStoreId(Mage::app()->getStore()->getId());
 
+        $output = '';
         if ($query->getQueryText() != '') {
             if (Mage::helper('catalogsearch')->isMinQueryLength()) {
                 $query->setId(0)
@@ -42,10 +43,20 @@ class Made_Loop54_ResultController extends Mage_Core_Controller_Front_Action
             if (!Mage::helper('catalogsearch')->isMinQueryLength()) {
                 $query->save();
             }
+
+            $layout = $this->getLayout();
+
+            // This instantiates the layer instance which handles the search results
+            $layout->createBlock('made_loop54/catalogsearch_layer');
+
+            $output = $layout->createBlock('catalogsearch/result')
+                ->setTemplate('catalogsearch/result.phtml')
+                ->toHtml();
         }
 
-        $this->loadLayout();
-        $this->renderLayout();
+        $this->getResponse()
+            ->setHeader('Content-type', 'application/json')
+            ->setBody($output);
     }
 
 }
