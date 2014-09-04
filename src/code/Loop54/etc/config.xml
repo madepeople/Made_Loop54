@@ -45,6 +45,13 @@
                 </args>
             </made_loop54>
         </routers>
+        <layout>
+            <updates>
+                <made_loop54>
+                    <file>made/loop54.xml</file>
+                </made_loop54>
+            </updates>
+        </layout>
     </frontend>
     <default>
         <catalog>
