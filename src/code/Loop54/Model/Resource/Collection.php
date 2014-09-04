@@ -42,7 +42,7 @@ class Made_Loop54_Model_Resource_Collection
      *
      * @param   string $query
      *
-     * @return  Enterprise_Search_Model_Resource_Collection
+     * @return  Made_Loop54_Model_Resource_Collection
      */
     public function addSearchFilter($query)
     {
@@ -54,7 +54,7 @@ class Made_Loop54_Model_Resource_Collection
      * Search documents by query
      * Set found ids and number of found results
      *
-     * @return Enterprise_Search_Model_Resource_Collection
+     * @return Made_Loop54_Model_Resource_Collection
      */
     protected function _beforeLoad()
     {
@@ -89,11 +89,21 @@ class Made_Loop54_Model_Resource_Collection
         return parent::_beforeLoad();
     }
 
+    /**
+     * Retrieve the total amount of items. As of now we have to make a query
+     * on the whole result set
+     *
+     * @return int
+     */
     public function getSize()
     {
         if ($this->_size === null) {
             // We have to load, Loop54 doesn't support HEAD
-            list($result, $size) = $this->_engine->search($this->_searchQueryText);
+            $params = array(
+                'DirectResults_MaxEntities' => 1,
+                'RecommendedResults_MaxEntities' => 1,
+            );
+            list($result, $size) = $this->_engine->search($this->_searchQueryText, $params);
             $this->_size = $size;
         }
         return $this->_size;

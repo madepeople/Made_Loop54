@@ -22,7 +22,7 @@ class Made_Loop54_Model_Resource_Engine
     /**
      * Retrieve search result data collection
      *
-     * @return Enterprise_Search_Model_Resource_Collection
+     * @return Made_Loop54_Model_Resource_Collection
      */
     public function getResultCollection()
     {
