@@ -28,4 +28,27 @@ class Made_Loop54_Model_Resource_Engine
     {
         return Mage::getResourceModel('made_loop54/collection')->setEngine($this);
     }
+
+    /**
+     * Define if Layered Navigation is allowed
+     *
+     * @deprecated after 1.9.1
+     * @see $this->isLayeredNavigationAllowed()
+     *
+     * @return bool
+     */
+    public function isLeyeredNavigationAllowed()
+    {
+        $this->isLayeredNavigationAllowed();
+    }
+
+    /**
+     * Define if Layered Navigation is allowed
+     *
+     * @return bool
+     */
+    public function isLayeredNavigationAllowed()
+    {
+        return true;
+    }
 }

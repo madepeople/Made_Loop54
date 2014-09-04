@@ -9,7 +9,7 @@
         <models>
             <made_loop54>
                 <class>Made_Loop54_Model</class>
-                <resourceModel>loop54_resource</resourceModel>
+                <resourceModel>made_loop54_resource</resourceModel>
             </made_loop54>
             <made_loop54_resource>
                 <class>Made_Loop54_Model_Resource</class>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <catalogsearch_result_index>
+        <reference name="left">
+            <remove name="catalogsearch.leftnav"/>
+            <remove name="enterprisesearch.leftnav"/>
+            <block type="made_loop54/catalogsearch_layer" name="made_loop54.leftnav" before="-" template="catalog/layer/view.phtml"/>
+        </reference>
+    </catalogsearch_result_index>
+</layout>
