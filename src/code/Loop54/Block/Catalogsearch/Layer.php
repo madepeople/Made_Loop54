@@ -3,7 +3,7 @@
 /**
  * @author jonathan@madepeople.se
  */
-class Made_Loop54_Block_CatalogSearch_Layer extends Mage_CatalogSearch_Block_Layer
+class Made_Loop54_Block_Catalogsearch_Layer extends Mage_CatalogSearch_Block_Layer
 {
 
     /**
