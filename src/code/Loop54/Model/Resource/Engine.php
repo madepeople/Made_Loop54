@@ -104,4 +104,45 @@ class Made_Loop54_Model_Resource_Engine
         return Mage::getSingleton('catalog/product_visibility')->getVisibleInSiteIds();
     }
 
+    /**
+     * Prepare index array
+     *
+     * @param array $index
+     * @param string|null $separator
+     * @return array
+     */
+    public function prepareEntityIndex($index, $separator = null)
+    {
+        return $index;
+    }
+
+    /**
+     * Add entity data to search index
+     *
+     * @param int $entityId
+     * @param int $storeId
+     * @param array $index
+     * @param string $entityType 'product'|'cms'
+     *
+     * @return Enterprise_Search_Model_Resource_Engine
+     */
+    public function saveEntityIndex($entityId, $storeId, $index, $entityType = 'product')
+    {
+        return $this;
+    }
+
+    /**
+     * Add entities data to search index
+     *
+     * @param int $storeId
+     * @param array $entityIndexes
+     * @param string $entityType 'product'|'cms'
+     *
+     * @return Enterprise_Search_Model_Resource_Engine
+     */
+    public function saveEntityIndexes($storeId, $entityIndexes, $entityType = 'product')
+    {
+        return $this;
+    }
+
 }
