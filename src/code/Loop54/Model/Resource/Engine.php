@@ -69,4 +69,39 @@ class Made_Loop54_Model_Resource_Engine
     {
         return $this->_adapter->search($query, $params);
     }
+
+    /**
+     * We don't control the index at this point, so we just return $this
+     *
+     * @param null $storeIds
+     * @param null $entityIds
+     * @param string $entityType
+     * @return $this
+     */
+    public function cleanIndex($storeIds = null, $entityIds = null, $entityType = 'product')
+    {
+        return $this;
+    }
+
+    /**
+     * Define if current search engine supports advanced index
+     *
+     * @return bool
+     */
+    public function allowAdvancedIndex()
+    {
+        // Don't really know what this is yet
+        return false;
+    }
+
+    /**
+     * Retrieve allowed visibility values for current engine
+     *
+     * @return array
+     */
+    public function getAllowedVisibility()
+    {
+        return Mage::getSingleton('catalog/product_visibility')->getVisibleInSiteIds();
+    }
+
 }
