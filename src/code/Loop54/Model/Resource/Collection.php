@@ -4,7 +4,7 @@
  * @author jonathan@madepeople.se
  */
 class Made_Loop54_Model_Resource_Collection
-    extends Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Collection
+    extends Mage_Catalog_Model_Resource_Product_Collection
 {
     /**
      * Store search query text
@@ -61,33 +61,19 @@ class Made_Loop54_Model_Resource_Collection
      */
     protected function _beforeLoad()
     {
-        $ids = array();
         if ($this->_engine) {
             $query = $this->_searchQueryText;
-
             $params = array();
-            if ($this->_pageSize !== false) {
-                $page = ($this->_curPage  > 0) ? (int) $this->_curPage  : 1;
-                $rowCount = ($this->_pageSize > 0) ? (int) $this->_pageSize : 1;
-                $params['DirectResults_MaxEntities'] = $rowCount;
-                $params['DirectResults_Page'] = $page;
-            }
 
-            list($result, $size) = $this->_engine->search($query, $params);
-            $this->_size = $size;
+            list($result, $totalSize) = $this->_engine->search($query, $params);
+
             $ids = array();
             foreach ($result as $item) {
                 $ids[] = $item->entity->externalId;
             }
+
+            $this->getSelect()->where('e.entity_id IN (?)', $ids);
         }
-
-        $this->_searchedEntityIds = &$ids;
-        $this->getSelect()->where('e.entity_id IN (?)', $this->_searchedEntityIds);
-
-        /**
-         * To prevent limitations to the collection, because of new data logic
-         */
-        $this->_pageSize = false;
 
         return parent::_beforeLoad();
     }
@@ -101,13 +87,19 @@ class Made_Loop54_Model_Resource_Collection
     public function getSize()
     {
         if ($this->_size === null) {
-            // We have to load, Loop54 doesn't support HEAD
-            $params = array(
-                'DirectResults_MaxEntities' => 1,
-                'RecommendedResults_MaxEntities' => 1,
-            );
-            list($result, $size) = $this->_engine->search($this->_searchQueryText, $params);
-            $this->_size = $size;
+            // This is shit, but the chicken-egg issue we have prevents us
+            // from doing it differently. If we count the items from Loop54,
+            // we might count inactive/deleted/hidden products, so the result
+            // needs to come from our MySQL to be valid
+            $originalSelect = clone $this->_select;
+            $this->_beforeLoad()
+                ->_renderFilters()
+                ->_renderOrders();
+
+            $this->_select->columns(array('cnt' => new Zend_Db_Expr('COUNT(*)')));
+            $row = $this->getConnection()->fetchRow($this->_select);
+            $this->_size = $row['cnt'];
+            $this->_select = $originalSelect;
         }
         return $this->_size;
     }
