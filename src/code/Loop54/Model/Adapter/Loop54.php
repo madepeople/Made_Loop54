@@ -41,6 +41,27 @@ class Made_Loop54_Model_Adapter_Loop54
     }
 
     /**
+     * Return products similar to the given ID. Useful for the upsell block
+     *
+     * @param int $productId
+     * @return array
+     * @see Made_Loop54_Block_Product_List_Similar
+     */
+    public function getSimilarProducts($productId)
+    {
+        $request = new Loop54_Request('SimilarProducts');
+        $entity = new Loop54_Entity('Product', $productId);
+
+        $request->setValue('RequestEntity', $entity);
+        $request->setValue('SimilarProducts_MaxEntities', 100);
+
+        $url = Mage::getStoreConfig('catalog/search/loop54_url');
+        $response = Loop54_RequestHandling::getResponse($url, $request);
+
+        return $response->getCollection('SimilarProducts');
+    }
+
+    /**
      * Return autocomplete results suitable for input text quick search fields
      *
      * @param $query
