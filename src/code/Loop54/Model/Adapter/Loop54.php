@@ -50,7 +50,7 @@ class Made_Loop54_Model_Adapter_Loop54
     public function getSimilarProducts($productId)
     {
         $request = new Loop54_Request('SimilarProducts');
-        $entity = new Loop54_Entity('Product', $productId);
+        $entity = new Loop54_Entity('Document', $productId);
 
         $request->setValue('RequestEntity', $entity);
         $request->setValue('SimilarProducts_MaxEntities', 100);
