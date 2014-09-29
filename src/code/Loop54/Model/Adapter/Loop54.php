@@ -57,6 +57,9 @@ class Made_Loop54_Model_Adapter_Loop54
 
         $url = Mage::getStoreConfig('catalog/search/loop54_url');
         $response = Loop54_RequestHandling::getResponse($url, $request);
+        if (empty($response)) {
+            return array();
+        }
 
         return $response->getCollection('SimilarProducts');
     }
