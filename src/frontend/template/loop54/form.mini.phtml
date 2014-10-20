@@ -10,8 +10,10 @@ $loop54Helper =  $this->helper('made_loop54');
     </div>
     <script type="text/javascript">
         //<![CDATA[
-        var searchForm = new Varien.searchForm('search_mini_form', 'search', '<?php echo $this->__('Search entire store here...') ?>');
-        searchForm.initAutocomplete('<?php echo $loop54Helper->getAjaxResultUrl() ?>', 'search_autocomplete');
+        $(document).observe('dom:loaded', function () {
+            var searchForm = new Varien.searchForm('search_mini_form', 'search', '<?php echo $this->__('Search entire store here...') ?>');
+            searchForm.initAutocomplete('<?php echo $loop54Helper->getAjaxResultUrl() ?>', 'search_autocomplete');
+        });
         //]]>
     </script>
 </form>
