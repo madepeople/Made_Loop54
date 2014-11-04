@@ -36,6 +36,11 @@ class Made_Loop54_Block_Product_List_Similar
             Mage::getSingleton('catalog/product_visibility')
                 ->addVisibleInCatalogFilterToCollection($collection);
 
+            Mage::dispatchEvent('made_loop54_related_collection_init',
+                array(
+                    'collection' => $collection
+                ));
+
             $collection->load();
 
             foreach ($collection as $product) {

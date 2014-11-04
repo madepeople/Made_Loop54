@@ -28,6 +28,13 @@ class Made_Loop54_Model_Resource_Collection
     protected $_size;
 
     /**
+     * Contains the loop 54 response object after a successful search
+     *
+     * @var object
+     */
+    protected $_loop54Response;
+
+    /**
      * Set search engine
      *
      * @param object $engine
@@ -65,8 +72,13 @@ class Made_Loop54_Model_Resource_Collection
             $query = $this->_searchQueryText;
             $params = array();
 
-            list($result, $totalSize) = $this->_engine->search($query, $params);
+            $response = $this->_engine->search($query, $params);
 
+            // Put the response in the collection regardless, so we can do some
+            // template magic
+            $this->_loop54Response = $response;
+
+            $result = $response->getCollection('DirectResults');
             $ids = array();
             foreach ($result as $item) {
                 $ids[] = $item->entity->externalId;
@@ -76,6 +88,11 @@ class Made_Loop54_Model_Resource_Collection
         }
 
         return parent::_beforeLoad();
+    }
+
+    public function getLoop54Response()
+    {
+        return $this->_loop54Response;
     }
 
     /**

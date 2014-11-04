@@ -1,10 +1,10 @@
 <?php $_results = $this->getResults() ?>
 <?php $_catalogSearchHelper =  $this->helper('catalogsearch'); ?>
 
-<div class="loop54-autocomplete-list">
+<ul class="loop54-autocomplete-list">
     <?php foreach ($_results as $_result): ?>
-        <p class="loop54-autocomplete-item">
+        <li class="loop54-autocomplete-item">
             <a href="<?php echo $_catalogSearchHelper->getResultUrl() ?>?<?php echo $_catalogSearchHelper->getQueryParamName() ?>=<?php echo $this->htmlEscape($_result->string) ?>"><?php echo $this->htmlEscape($_result->string) ?></a>
-        </p>
+        </li>
     <?php endforeach ?>
-</div>
+</ul>

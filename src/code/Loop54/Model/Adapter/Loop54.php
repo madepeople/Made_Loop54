@@ -34,10 +34,11 @@ class Made_Loop54_Model_Adapter_Loop54
         $url = Mage::getStoreConfig('catalog/search/loop54_url');
         $response = Loop54_RequestHandling::getResponse($url, $request);
 
-        return array(
-            $response->getCollection('DirectResults'),
-            $response->_data->DirectResults_TotalItems
-        );
+        if (Mage::registry('latest_loop54_response')) {
+            Mage::unregister('latest_loop54_response');
+        }
+        Mage::register('latest_loop54_response', $response);
+        return $response;
     }
 
     /**
