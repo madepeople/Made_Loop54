@@ -3,7 +3,7 @@
 
 <ul class="loop54-autocomplete-list">
     <?php foreach ($_results as $_result): ?>
-        <li class="loop54-autocomplete-item">
+        <li class="loop54-autocomplete-item" title="<?php echo $this->escapeHtml($_result->string) ?>">
             <a href="<?php echo $_catalogSearchHelper->getResultUrl() ?>?<?php echo $_catalogSearchHelper->getQueryParamName() ?>=<?php echo $this->htmlEscape($_result->string) ?>"><?php echo $this->htmlEscape($_result->string) ?></a>
         </li>
     <?php endforeach ?>
