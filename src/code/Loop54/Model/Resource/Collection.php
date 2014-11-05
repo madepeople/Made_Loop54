@@ -101,7 +101,7 @@ class Made_Loop54_Model_Resource_Collection
     {
         if ($attribute == 'relevance') {
             $response = $this->_loop54Response;
-            if ($response && !empty($this->_orders)) {
+            if ($response) {
                 $result = $response->getCollection('DirectResults');
                 $ids = array();
                 foreach ($result as $item) {
