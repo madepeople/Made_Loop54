@@ -90,6 +90,57 @@ class Made_Loop54_Model_Resource_Collection
         return parent::_beforeLoad();
     }
 
+    /**
+     * Add attribute to sort order
+     *
+     * @param string $attribute
+     * @param string $dir
+     * @return Mage_Catalog_Model_Resource_Product_Collection
+     */
+    public function addAttributeToSort($attribute, $dir = self::SORT_ORDER_ASC)
+    {
+        if ($attribute == 'relevance') {
+            $response = $this->_loop54Response;
+            if ($response && !empty($this->_orders)) {
+                $result = $response->getCollection('DirectResults');
+                $ids = array();
+                foreach ($result as $item) {
+                    $ids[] = array(
+                        'id' => $item->entity->externalId,
+                        'relevance' => $item->value
+                    );
+                }
+
+                // 16:18 < Xgc> js_: It's a bad idea.  But sometimes we have to do what
+                // we have to do.
+                $unionTable = '';
+                foreach ($ids as $item) {
+                    $unionTable .= 'UNION SELECT ' . $item['id'] . ' `entity_id`, '
+                        . $item['relevance'] . ' `relevance` ';
+                }
+
+                $unionTable = preg_replace('#^UNION #', '', $unionTable);
+                $unionTable = "(SELECT * FROM ($unionTable) loop54_relevance)";
+
+                $this->_select->join(
+                    array('loop54_relevance' => new Zend_Db_Expr($unionTable)),
+                    'loop54_relevance.entity_id = e.entity_id',
+                    array('entity_id', 'relevance')
+                );
+
+                $this->_select->order("loop54_relevance.relevance {$dir}");
+                return $this;
+            }
+        }
+
+        return parent::addAttributeToSort($attribute, $dir);
+    }
+
+    /**
+     * Return the response for the future
+     *
+     * @return object
+     */
     public function getLoop54Response()
     {
         return $this->_loop54Response;
@@ -110,8 +161,7 @@ class Made_Loop54_Model_Resource_Collection
             // needs to come from our MySQL to be valid
             $originalSelect = clone $this->_select;
             $this->_beforeLoad()
-                ->_renderFilters()
-                ->_renderOrders();
+                ->_renderFilters();
 
             $this->_select->columns(array('cnt' => new Zend_Db_Expr('COUNT(*)')));
             $row = $this->getConnection()->fetchRow($this->_select);
