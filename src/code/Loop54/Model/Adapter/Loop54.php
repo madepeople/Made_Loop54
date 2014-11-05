@@ -86,4 +86,29 @@ class Made_Loop54_Model_Adapter_Loop54
 
         return $response->getCollection('AutoComplete');
     }
+
+    /**
+     * Used for behaviour feedback into the Loop54 engine
+     *
+     * @param Loop54_Event $event
+     */
+    public function registerEvent($events)
+    {
+        if (!is_array($events)) {
+            $events = array($events);
+        }
+
+        $request = new Loop54_Request('CreateEvents');
+        $request->setValue('Events', $events);
+
+        $url = Mage::getStoreConfig('catalog/search/loop54_url');
+        $response = Loop54_RequestHandling::getResponse($url, $request);
+
+        if (!$response->success) {
+            Mage::log(__METHOD__ . ': ' . $response->errorCode . ' - ' . $response->errorMessage, null, 'loop54.log');
+            return false;
+        }
+
+        return true;
+    }
 }

@@ -15,15 +15,6 @@
                 <class>Made_Loop54_Model_Resource</class>
             </made_loop54_resource>
         </models>
-        <!--
-        <resources>
-            <made_loop54_setup>
-                <setup>
-                    <module>Made_Loop54</module>
-                </setup>
-            </made_loop54_setup>
-        </resources>
-        -->
         <helpers>
             <made_loop54>
                 <class>Made_Loop54_Helper</class>
@@ -52,11 +43,41 @@
                 </made_loop54>
             </updates>
         </layout>
+        <events>
+            <catalog_controller_product_view>
+                <observers>
+                    <register_catalog_product_view>
+                        <type>singleton</type>
+                        <model>Made_Loop54_Model_Observer</model>
+                        <method>registerCatalogProductView</method>
+                    </register_catalog_product_view>
+                </observers>
+            </catalog_controller_product_view>
+            <checkout_cart_product_add_after>
+                <observers>
+                    <register_add_to_cart>
+                        <type>singleton</type>
+                        <model>Made_Loop54_Model_Observer</model>
+                        <method>registerAddToCart</method>
+                    </register_add_to_cart>
+                </observers>
+            </checkout_cart_product_add_after>
+            <checkout_submit_all_after>
+                <observers>
+                    <register_purchase>
+                        <type>singleton</type>
+                        <model>Made_Loop54_Model_Observer</model>
+                        <method>registerPurchase</method>
+                    </register_purchase>
+                </observers>
+            </checkout_submit_all_after>
+        </events>
     </frontend>
     <default>
         <catalog>
             <search>
                 <loop54_autocomplete_max_results>10</loop54_autocomplete_max_results>
+                <loop54_register_events>0</loop54_register_events>
             </search>
         </catalog>
     </default>
