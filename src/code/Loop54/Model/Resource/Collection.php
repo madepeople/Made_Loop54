@@ -102,32 +102,8 @@ class Made_Loop54_Model_Resource_Collection
         if ($attribute == 'relevance') {
             $response = $this->_loop54Response;
             if ($response) {
-                $result = $response->getCollection('DirectResults');
-                $ids = array();
-                foreach ($result as $item) {
-                    $ids[] = array(
-                        'id' => $item->entity->externalId,
-                        'relevance' => $item->value
-                    );
-                }
-
-                // 16:18 < Xgc> js_: It's a bad idea.  But sometimes we have to do what
-                // we have to do.
-                $unionTable = '';
-                foreach ($ids as $item) {
-                    $unionTable .= 'UNION SELECT ' . $item['id'] . ' `entity_id`, '
-                        . $item['relevance'] . ' `relevance` ';
-                }
-
-                $unionTable = preg_replace('#^UNION #', '', $unionTable);
-                $unionTable = "(SELECT * FROM ($unionTable) loop54_relevance)";
-
-                $this->_select->join(
-                    array('loop54_relevance' => new Zend_Db_Expr($unionTable)),
-                    'loop54_relevance.entity_id = e.entity_id',
-                    array('entity_id', 'relevance')
-                );
-
+                $loop54result = $response->getCollection('DirectResults');
+                Mage::helper('made_loop54')->addLoopRelevanceToCollection($this, $loop54result);
                 $this->_select->order("loop54_relevance.relevance {$dir}");
                 return $this;
             }
