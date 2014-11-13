@@ -39,6 +39,10 @@ class Made_Loop54_Block_Product_List_Similar
             Mage::helper('made_loop54')->addLoopRelevanceToCollection($collection, $similarProducts);
             $collection->getSelect()->order("loop54_relevance.relevance DESC");
 
+            // Exclude the current product
+            $collection->getSelect()
+                ->where('e.entity_id != ?', $product->getId());
+
             Mage::dispatchEvent('made_loop54_related_collection_init',
                 array(
                     'collection' => $collection
