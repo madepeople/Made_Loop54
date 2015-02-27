@@ -62,7 +62,12 @@ class Made_Loop54_Model_Adapter_Loop54
             return array();
         }
 
-        return $response->getCollection('SimilarProducts');
+        if (isset($response->_data->SimilarProducts)) {
+            $data = $response->getCollection('SimilarProducts');
+        } else {
+            $data = array();
+        }
+        return $data;
     }
 
     /**
