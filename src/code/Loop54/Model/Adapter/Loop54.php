@@ -110,7 +110,7 @@ class Made_Loop54_Model_Adapter_Loop54
         $response = Loop54_RequestHandling::getResponse($url, $request);
 
         if (!$response->success) {
-            Mage::log(__METHOD__ . ': ' . $response->errorCode . ' - ' . $response->errorMessage, null, 'loop54.log');
+            Mage::log(__METHOD__ . ': ' . var_export($response, true), null, 'loop54.log');
             return false;
         }
 
