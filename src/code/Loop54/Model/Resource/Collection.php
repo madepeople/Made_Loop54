@@ -4,7 +4,7 @@
  * @author jonathan@madepeople.se
  */
 class Made_Loop54_Model_Resource_Collection
-    extends Mage_Catalog_Model_Resource_Product_Collection
+    extends Mage_Catalog_Model_Resource_Eav_Mysql4_Product_Collection
 {
     /**
      * Store search query text
@@ -84,7 +84,8 @@ class Made_Loop54_Model_Resource_Collection
                 $ids[] = $item->entity->externalId;
             }
 
-            $this->getSelect()->where('e.entity_id IN (?)', $ids);
+            $idField = Mage::helper('made_loop54')->getIdFieldName();
+            $this->getSelect()->where('e.' . $idField . ' IN (?)', $ids);
         }
 
         return parent::_beforeLoad();

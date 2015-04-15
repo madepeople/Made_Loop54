@@ -7,6 +7,17 @@ class Made_Loop54_Helper_Data extends Mage_Core_Helper_Abstract
 {
 
     /**
+     * Returns the field used for mapping Loop54 externalId with Magento products
+     *
+     * @return string
+     */
+    public function getIdFieldName()
+    {
+        $idField = Mage::getStoreConfig('catalog/search/loop54_external_id');
+        return $idField;
+    }
+
+    /**
      * Retrieve information from search engine configuration
      *
      * @param string $field
@@ -65,12 +76,16 @@ class Made_Loop54_Helper_Data extends Mage_Core_Helper_Abstract
             );
         }
 
+        $idField = $this->getIdFieldName();
+
         // 16:18 < Xgc> js_: It's a bad idea.  But sometimes we have to
         // do what we have to do.
         $unionTable = '';
+        $connection = $collection->getConnection();
         foreach ($ids as $item) {
-            $unionTable .= 'UNION SELECT ' . $item['id'] . ' `entity_id`, '
+            $query = 'UNION SELECT ? `' . $idField . '`, '
                 . $item['relevance'] . ' `relevance` ';
+            $unionTable .= $connection->quoteInto($query, $item['id']);
         }
 
         $unionTable = preg_replace('#^UNION #', '', $unionTable);
@@ -78,8 +93,8 @@ class Made_Loop54_Helper_Data extends Mage_Core_Helper_Abstract
 
         $collection->getSelect()->join(
             array('loop54_relevance' => new Zend_Db_Expr($unionTable)),
-            'loop54_relevance.entity_id = e.entity_id',
-            array('entity_id', 'relevance')
+            'loop54_relevance.' . $idField . ' = e.' . $idField,
+            array($idField, 'relevance')
         );
 
         return $collection;

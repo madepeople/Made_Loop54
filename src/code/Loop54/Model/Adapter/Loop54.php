@@ -26,6 +26,10 @@ class Made_Loop54_Model_Adapter_Loop54
     {
         $request = new Loop54_Request('Search');
         $request->setValue('QueryString', $query);
+        $request->setValue('DirectResults_FromIndex', 0);
+        $request->setValue('DirectResults_ToIndex', 10000);
+        $request->setValue('RecommendedResults_FromIndex', 0);
+        $request->setValue('RecommendedResults_ToIndex', 10000);
 
         foreach ($params as $key => $value) {
             $request->setValue($key, $value);
@@ -90,6 +94,23 @@ class Made_Loop54_Model_Adapter_Loop54
         $response = Loop54_RequestHandling::getResponse($url, $request);
 
         return $response->getCollection('AutoComplete');
+    }
+
+    /**
+     * Used to return how many results are available for the supplied query
+     *
+     * @param $query
+     * @return array
+     */
+    public function getTotalHits($query)
+    {
+        $request = new Loop54_Request('GetTotalHits');
+        $request->setValue('QueryString', $query);
+
+        $url = Mage::getStoreConfig('catalog/search/loop54_url');
+        $response = Loop54_RequestHandling::getResponse($url, $request);
+
+        return $response->getCollection('GetTotalHits');
     }
 
     /**

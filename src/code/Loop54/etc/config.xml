@@ -78,6 +78,7 @@
             <search>
                 <loop54_autocomplete_max_results>10</loop54_autocomplete_max_results>
                 <loop54_register_events>0</loop54_register_events>
+                <loop54_external_id>entity_id</loop54_external_id>
             </search>
         </catalog>
     </default>

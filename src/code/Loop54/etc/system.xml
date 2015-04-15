@@ -49,6 +49,19 @@
                                 <engine>made_loop54/engine</engine>
                             </depends>
                         </loop54_register_events>
+                        <loop54_external_id translate="label">
+                            <label>Loop54 External ID</label>
+                            <comment>The field used to map the Magento catalog with Loop54 (usually "Entity ID")</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>made_loop54/config_source_idField</source_model>
+                            <sort_order>54</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <engine>made_loop54/engine</engine>
+                            </depends>
+                        </loop54_external_id>
                     </fields>
                 </search>
             </groups>
