@@ -84,6 +84,13 @@ class Made_Loop54_Model_Resource_Collection
                 $ids[] = $item->entity->externalId;
             }
 
+            if (Mage::getStoreConfig('catalog/search/loop54_merge_recommended')) {
+                $result = $response->getCollection('RecommendedResults');
+                foreach ($result as $item) {
+                    $ids[] = $item->entity->externalId;
+                }
+            }
+
             $idField = Mage::helper('made_loop54')->getIdFieldName();
             $this->getSelect()->where('e.' . $idField . ' IN (?)', $ids);
         }
@@ -104,6 +111,12 @@ class Made_Loop54_Model_Resource_Collection
             $response = $this->_loop54Response;
             if ($response) {
                 $loop54result = $response->getCollection('DirectResults');
+                if (Mage::getStoreConfig('catalog/search/loop54_merge_recommended')) {
+                    $recommendedResults = $response->getCollection('RecommendedResults');
+                    foreach ($recommendedResults as $item) {
+                        $loop54result[] = $item;
+                    }
+                }
                 Mage::helper('made_loop54')->addLoopRelevanceToCollection($this, $loop54result);
                 $this->_select->order("loop54_relevance.relevance {$dir}");
                 return $this;
