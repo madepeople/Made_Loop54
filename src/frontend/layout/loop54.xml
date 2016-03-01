@@ -19,7 +19,7 @@
     <catalog_product_view>
         <reference name="product.info">
             <!-- remove name="catalog.product.related" / -->
-            <block type="made_loop54/product_list_similar" name="product.info.upsell" as="upsell_products" template="catalog/product/list/upsell.phtml"/>
+            <!--<block type="made_loop54/product_list_similar" name="product.info.upsell" as="upsell_products" template="catalog/product/list/upsell.phtml"/>-->
         </reference>
     </catalog_product_view>
 
